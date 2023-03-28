@@ -14,7 +14,7 @@ class Coder:
         self.counts = freqs
         self.cumCounts = (0,) + tuple(accumulate(self.counts))
         self.totalCount = sum(freqs)
-    
+
     def setStatisticsFromSequence(self, sequence: tuple[int, ...]) -> None:
         self.symbols = tuple(set(sequence))
         self.counts = tuple(sequence.count(x) for x in self.symbols)
