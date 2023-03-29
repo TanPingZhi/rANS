@@ -12,6 +12,7 @@ def countBits(n: int) -> int:
     return len(bin(n)) - 2
 
 
+random.seed(1)
 def test_ratio(p: float) -> list[float]:
     # p: the true proportion of 2's
     # fix constant distribution q = 0.1 to match f = (1, 9)s
@@ -30,11 +31,8 @@ def test_ratio(p: float) -> list[float]:
     numBitsResults = []
 
     for trial in range(TRIALS):
-        randomTwosIndices = random.sample(range(M), k=int(p*M))
-        randomSeq = [1 for i in range(M)]
-        for ri in randomTwosIndices:
-            randomSeq[ri] = 2
-        randomSeq = tuple(randomSeq)
+        randomSeq = tuple(2 if random.uniform(0, 1) <
+                          p else 1 for i in range(M))
         enc = e.encodeSequence(randomSeq)
         numBitsResults.append(countBits(enc))
 
@@ -71,3 +69,11 @@ plt.show()
 
 print("average compression ratio")
 print(*map(lambda x: round(x, 1), comps), sep=" & ")
+print()
+
+def kll(p):
+    return p*log2(p/0.9) + (1-p) * log2((1-p)/0.1)
+
+print("KLD")
+for p in range(5, 50, 10):
+    print(kll(p/100), end = " & ")

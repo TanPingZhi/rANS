@@ -12,10 +12,11 @@ def countBits(n: int) -> int:
     return len(bin(n)) - 2
 
 
+random.seed(0)
 def test_ratio(p: float) -> list[float]:
     # p: the true proportion of 2's
-    nOnes: int = int(p * M)
-    nTwos: int = M - nOnes
+    nTwos: int = int(p * M)
+    nOnes: int = M - nTwos
 
     # reduce the ratios in f to simplest form
     g: int = gcd(nOnes, nTwos)
@@ -28,11 +29,7 @@ def test_ratio(p: float) -> list[float]:
     numBitsResults = []
 
     for trial in range(TRIALS):
-        randomTwosIndices = random.sample(range(M), k=nTwos)
-        randomSeq = [1 for i in range(M)]
-        for ri in randomTwosIndices:
-            randomSeq[ri] = 2
-        randomSeq = tuple(randomSeq)
+        randomSeq = tuple(2 if random.uniform(0, 1) < p else 1 for i in range(M))
         enc = e.encodeSequence(randomSeq)
         numBitsResults.append(countBits(enc))
 
