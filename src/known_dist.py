@@ -9,11 +9,7 @@ M: int = 1000
 
 
 def countBits(n: int) -> int:
-    ans: int = 0
-    while n > 0:
-        n >>= 1
-        ans += 1
-    return ans
+    return len(bin(n)) - 2
 
 
 def test_ratio(p: float) -> list[float]:
