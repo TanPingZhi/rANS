@@ -54,7 +54,7 @@ for p in xs:
 
 plt.title("rANS")
 plt.ylabel("Average encoding length")
-plt.xlabel("Fraction of 2's in a sequence of 1's and 2's")
+plt.xlabel("r")
 plt.errorbar(xs, y=means, yerr=stds)
 plt.show()
 print("average encoding length")
@@ -63,7 +63,7 @@ print()
 
 plt.title("rANS")
 plt.ylabel("Average compression ratio")
-plt.xlabel("Fraction of 2's in a sequence of 1's and 2's")
+plt.xlabel("r")
 plt.errorbar(xs, y=comps, yerr=compsstds)
 plt.show()
 
